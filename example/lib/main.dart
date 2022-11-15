@@ -55,6 +55,7 @@ class _FluidNavBarDemoState extends State {
           style: FluidNavBarStyle(iconUnselectedForegroundColor: Colors.white),
           scaleFactor: 1.5,
           defaultIndex: 1,
+          iconSizeFactor: 0.8,
           itemBuilder: (icon, item) => Semantics(
             label: icon.extras!["label"],
             child: item,

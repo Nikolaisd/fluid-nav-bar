@@ -48,6 +48,9 @@ class FluidNavBarItem extends StatefulWidget {
   /// The delay factor of the animations ( < 1 is faster, > 1 is slower)
   final double animationFactor;
 
+  /// The icon size factor scaling
+  final double iconSizeFactor;
+
   FluidNavBarItem(
     this.svgPath,
     this.icon,
@@ -58,6 +61,7 @@ class FluidNavBarItem extends StatefulWidget {
     this.backgroundColor,
     this.scaleFactor,
     this.animationFactor,
+    this.iconSizeFactor,
   )   : assert(scaleFactor >= 1.0),
         assert(svgPath == null || icon == null,
             'Cannot provide both an iconPath and an icon.'),
@@ -72,9 +76,9 @@ class FluidNavBarItem extends StatefulWidget {
 
 class _FluidNavBarItemState extends State<FluidNavBarItem>
     with SingleTickerProviderStateMixin {
-  static const double _activeOffset = 16;
-  static const double _defaultOffset = 0;
-  static const double _iconSize = 25;
+  static const double _activeOffset = 20;
+  static const double _defaultOffset = 4;
+  double _iconSize = 28;
 
   bool _selected;
 
@@ -90,6 +94,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
   void initState() {
     super.initState();
 
+    _iconSize = (_iconSize * 1.0);
     double waveRatio = 0.28;
     _animationController = AnimationController(
       duration: Duration(milliseconds: (1600 * widget.animationFactor).toInt()),
@@ -151,7 +156,7 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
 
   @override
   Widget build(context) {
-    const ne = FluidNavBarItem.nominalExtent;
+    final ne = FluidNavBarItem.nominalExtent;
 
     final scaleAnimation =
         _selected ? _activatingAnimation : _inactivatingAnimation;
@@ -163,8 +168,10 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
         constraints: BoxConstraints.tight(ne),
         alignment: Alignment.center,
         child: Container(
-          margin: EdgeInsets.all(ne.width / 2 - _iconSize),
+          margin: EdgeInsets.all(0),
+          // margin: EdgeInsets.all(ne.width / 2 - _iconSize),
           constraints: BoxConstraints.tight(Size.square(_iconSize * 2)),
+          // constraints: BoxConstraints.tight(Size(40, 50)),
           decoration: ShapeDecoration(
             color: widget.backgroundColor,
             shape: CircleBorder(),

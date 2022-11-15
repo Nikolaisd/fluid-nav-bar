@@ -47,6 +47,11 @@ class FluidNavBar extends StatefulWidget {
   ///   * > 1 is slower
   final double animationFactor;
 
+  /// Icon size factor
+  /// 1.0 means that the icon is not scaled. 1.5 means the icons are scale up by 50%
+
+  final double iconSizeFactor;
+
   /// The scale factor used when an icon is tapped
   /// 1.0 means that the icon is not scaled and 1.5 means the icons is scaled to +50%
   /// An optional builder to change or wrap the builded item
@@ -68,6 +73,7 @@ class FluidNavBar extends StatefulWidget {
       this.style,
       this.animationFactor = 1.0,
       this.scaleFactor = 1.2,
+      this.iconSizeFactor = 1.0,
       this.defaultIndex = 0,
       this.addedHeight = 0,
       FluidNavBarItemBuilder? itemBuilder})
@@ -197,6 +203,7 @@ class _FluidNavBarState extends State<FluidNavBar>
                   Colors.white,
               widget.scaleFactor,
               widget.animationFactor,
+              widget.iconSizeFactor,
             ),
           ),
         )
@@ -254,16 +261,16 @@ class _BackgroundCurvePainter extends CustomPainter {
   // Top: 0.6 point, 0.35 horizontal
   // Bottom:
 
-  static const _radiusTop = 54.0;
-  static const _radiusBottom = 44.0;
+  static const _radiusTop = 66.0;
+  static const _radiusBottom = 54.0;
   static const _horizontalControlTop = 0.6;
   static const _horizontalControlBottom = 0.5;
   static const _pointControlTop = 0.35;
   static const _pointControlBottom = 0.85;
-  static const _topY = -10.0;
-  static const _bottomY = 54.0;
+  static const _topY = 10.0;
+  static const _bottomY = 60.0;
   static const _topDistance = 0.0;
-  static const _bottomDistance = 6.0;
+  static const _bottomDistance = 1.0;
 
   final double _x;
   final double _normalizedY;
