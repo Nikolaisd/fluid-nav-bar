@@ -261,17 +261,19 @@ class _BackgroundCurvePainter extends CustomPainter {
   // Top: 0.6 point, 0.35 horizontal
   // Bottom:
 
-  static const _radiusTop = 66.0;
+  static const _radiusTop = 60.0;
   static const _radiusBottom = 54.0;
   static const _horizontalControlTop = 0.6;
   static const _horizontalControlBottom = 0.5;
   static const _pointControlTop = 0.35;
   static const _pointControlBottom = 0.85;
   static const _topY = 10.0;
-  static const _bottomY = 60.0;
+  static const _bottomY = 50.0;
   static const _topDistance = 0.0;
   static const _bottomDistance = 1.0;
+  static const _depth = 10.0;
 
+  // final double
   final double _x;
   final double _normalizedY;
   final Color _color;
@@ -305,14 +307,14 @@ class _BackgroundCurvePainter extends CustomPainter {
     final x1 = _x + dist / 2;
 
     final path = Path()
-      ..moveTo(0, 0)
-      ..lineTo(x0 - radius, 0)
-      ..cubicTo(
-          x0 - radius + anchorControlOffset, 0, x0 - dipControlOffset, y, x0, y)
+      ..moveTo(0, 0 - _depth)
+      ..lineTo(x0 - radius, 0 - _depth)
+      ..cubicTo(x0 - radius + anchorControlOffset, 0 - _depth,
+          x0 - dipControlOffset, y, x0, y)
       ..lineTo(x1, y)
-      ..cubicTo(x1 + dipControlOffset, y, x1 + radius - anchorControlOffset, 0,
-          x1 + radius, 0)
-      ..lineTo(size.width, 0)
+      ..cubicTo(x1 + dipControlOffset, y, x1 + radius - anchorControlOffset,
+          0 - _depth, x1 + radius, 0 - _depth)
+      ..lineTo(size.width, 0 - _depth)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height);
 
