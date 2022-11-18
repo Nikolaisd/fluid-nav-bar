@@ -171,7 +171,7 @@ class _FluidNavBarState extends State<FluidNavBar>
           begin: Curves.easeInExpo.transform(_yController.value),
           end: ElasticOutCurve(0.38).transform(_yController.value),
         ).transform(_yController.velocity.sign * 0.5 + 0.5),
-        widget.style?.barBackgroundColor ?? Colors.white,
+        widget.style?.barBackgroundColor ?? Colors.grey,
         widget.style?.linearGradient ?? null,
       ),
     );
@@ -197,11 +197,11 @@ class _FluidNavBarState extends State<FluidNavBar>
                   Colors.grey,
               entry.value.selectedBackgroundColor ??
                   widget.style?.barBackgroundColor ??
-                  Colors.white,
+                  Colors.grey,
               entry.value.unselectedBackgroundColor ??
                   widget.style?.iconBackgroundColor ??
                   widget.style?.barBackgroundColor ??
-                  Colors.white,
+                  Colors.transparent,
               widget.scaleFactor,
               widget.animationFactor,
               widget.iconSizeFactor,
@@ -322,10 +322,15 @@ class _BackgroundCurvePainter extends CustomPainter {
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height);
 
-    final paint = Paint()..color = _color;
+    final paint = Paint();
+
     if (_linearGradient != null) {
       paint.shader = _linearGradient!.createShader(Rect.fromCenter(
-          center: Offset(x0, x1), width: size.width, height: size.height));
+          center: Offset(x1, _normalizedY),
+          width: size.width,
+          height: size.height));
+    } else {
+      paint.color = _color;
     }
 
     canvas.drawPath(path, paint);
@@ -335,6 +340,7 @@ class _BackgroundCurvePainter extends CustomPainter {
   bool shouldRepaint(_BackgroundCurvePainter oldPainter) {
     return _x != oldPainter._x ||
         _normalizedY != oldPainter._normalizedY ||
+        _linearGradient != oldPainter._linearGradient ||
         _color != oldPainter._color;
   }
 }
