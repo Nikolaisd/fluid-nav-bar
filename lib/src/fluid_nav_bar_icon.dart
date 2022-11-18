@@ -20,11 +20,14 @@ class FluidNavBarIcon {
   /// The color used to paint the SVG when the item is active
   final Color? selectedForegroundColor;
 
+  /// The color used to paint the SVG when the item is active
+  final Color? selectedBackgroundColor;
+
   /// The color used to paint the SVG when the item is inactive
   final Color? unselectedForegroundColor;
 
   /// The background color of the item
-  final Color? backgroundColor;
+  final Color? unselectedBackgroundColor;
 
   /// Extra information which can be used in [FluidNavBarItemBuilder]
   final Map<String, dynamic>? extras;
@@ -35,8 +38,11 @@ class FluidNavBarIcon {
     this.icon,
     this.selectedForegroundColor,
     this.unselectedForegroundColor,
-    this.backgroundColor,
+    this.selectedBackgroundColor,
+    this.unselectedBackgroundColor,
     this.extras,
-  })  : assert(iconPath == null || svgPath == null || icon == null, 'Cannot provide both an svgPath and an icon.'),
-        assert(iconPath != null || svgPath != null || icon != null, 'An svgPath or an icon must be provided.');
+  })  : assert(iconPath == null || svgPath == null || icon == null,
+            'Cannot provide both an svgPath and an icon.'),
+        assert(iconPath != null || svgPath != null || icon != null,
+            'An svgPath or an icon must be provided.');
 }

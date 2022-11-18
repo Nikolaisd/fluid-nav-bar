@@ -28,7 +28,7 @@ typedef Widget FluidNavBarItemBuilder(
 ///
 ///
 class FluidNavBar extends StatefulWidget {
-  static const double nominalHeight = 56.0;
+  static const double nominalHeight = 90.0;
 
   final double addedHeight;
 
@@ -159,9 +159,6 @@ class _FluidNavBarState extends State<FluidNavBar>
             ],
           ),
         ),
-        Container(
-            height: widget.addedHeight,
-            color: widget.style?.barBackgroundColor ?? Colors.white),
       ],
     );
   }
@@ -175,6 +172,7 @@ class _FluidNavBarState extends State<FluidNavBar>
           end: ElasticOutCurve(0.38).transform(_yController.value),
         ).transform(_yController.velocity.sign * 0.5 + 0.5),
         widget.style?.barBackgroundColor ?? Colors.white,
+        widget.style?.linearGradient ?? null,
       ),
     );
   }
@@ -197,7 +195,10 @@ class _FluidNavBarState extends State<FluidNavBar>
               entry.value.unselectedForegroundColor ??
                   widget.style?.iconUnselectedForegroundColor ??
                   Colors.grey,
-              entry.value.backgroundColor ??
+              entry.value.selectedBackgroundColor ??
+                  widget.style?.barBackgroundColor ??
+                  Colors.white,
+              entry.value.unselectedBackgroundColor ??
                   widget.style?.iconBackgroundColor ??
                   widget.style?.barBackgroundColor ??
                   Colors.white,
@@ -267,21 +268,24 @@ class _BackgroundCurvePainter extends CustomPainter {
   static const _horizontalControlBottom = 0.5;
   static const _pointControlTop = 0.35;
   static const _pointControlBottom = 0.85;
-  static const _topY = 10.0;
+  static const _topY = 20.0;
   static const _bottomY = 50.0;
   static const _topDistance = 0.0;
   static const _bottomDistance = 1.0;
-  static const _depth = 10.0;
+  static const _dipDepth = 15.0;
 
   // final double
   final double _x;
   final double _normalizedY;
   final Color _color;
+  final LinearGradient? _linearGradient;
 
-  _BackgroundCurvePainter(double x, double normalizedY, Color color)
+  _BackgroundCurvePainter(
+      double x, double normalizedY, Color color, LinearGradient? linearGradient)
       : _x = x,
         _normalizedY = normalizedY,
-        _color = color;
+        _color = color,
+        _linearGradient = linearGradient;
 
   @override
   void paint(canvas, size) {
@@ -307,18 +311,22 @@ class _BackgroundCurvePainter extends CustomPainter {
     final x1 = _x + dist / 2;
 
     final path = Path()
-      ..moveTo(0, 0 - _depth)
-      ..lineTo(x0 - radius, 0 - _depth)
-      ..cubicTo(x0 - radius + anchorControlOffset, 0 - _depth,
-          x0 - dipControlOffset, y, x0, y)
-      ..lineTo(x1, y)
-      ..cubicTo(x1 + dipControlOffset, y, x1 + radius - anchorControlOffset,
-          0 - _depth, x1 + radius, 0 - _depth)
-      ..lineTo(size.width, 0 - _depth)
+      ..moveTo(0, 0)
+      ..lineTo(x0 - radius, 0)
+      ..cubicTo(x0 - radius + anchorControlOffset, 0, x0 - dipControlOffset,
+          y + _dipDepth, x0, y + _dipDepth)
+      ..lineTo(x1, y + _dipDepth)
+      ..cubicTo(x1 + dipControlOffset, y + _dipDepth,
+          x1 + radius - anchorControlOffset, 0, x1 + radius, 0)
+      ..lineTo(size.width, 0)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height);
 
     final paint = Paint()..color = _color;
+    if (_linearGradient != null) {
+      paint.shader = _linearGradient!.createShader(Rect.fromCenter(
+          center: Offset(x0, x1), width: size.width, height: size.height));
+    }
 
     canvas.drawPath(path, paint);
   }

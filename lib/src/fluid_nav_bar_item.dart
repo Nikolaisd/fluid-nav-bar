@@ -1,6 +1,4 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
-import 'package:fluid_bottom_nav_bar/src/fluid_nav_bar_icon.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -39,6 +37,9 @@ class FluidNavBarItem extends StatefulWidget {
   /// The background color of the item
   final Color backgroundColor;
 
+  /// The background color when the item is active
+  final Color selectedBackgroundColor;
+
   /// The temporary SVG scale used when the item pop
   final double scaleFactor;
 
@@ -58,6 +59,7 @@ class FluidNavBarItem extends StatefulWidget {
     this.onTap,
     this.selectedForegroundColor,
     this.unselectedForegroundColor,
+    this.selectedBackgroundColor,
     this.backgroundColor,
     this.scaleFactor,
     this.animationFactor,
@@ -169,11 +171,11 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
         alignment: Alignment.center,
         child: Container(
           margin: EdgeInsets.all(0),
-          // margin: EdgeInsets.all(ne.width / 2 - _iconSize),
           constraints: BoxConstraints.tight(Size.square(_iconSize * 2)),
-          // constraints: BoxConstraints.tight(Size(40, 50)),
           decoration: ShapeDecoration(
-            color: widget.backgroundColor,
+            color: _selected
+                ? widget.selectedBackgroundColor
+                : widget.backgroundColor,
             shape: CircleBorder(),
           ),
           transform: Matrix4.translationValues(0, -_yOffsetAnimation.value, 0),
