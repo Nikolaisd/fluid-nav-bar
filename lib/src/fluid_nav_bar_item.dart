@@ -25,6 +25,9 @@ class FluidNavBarItem extends StatefulWidget {
   // The icon data
   final IconData? icon;
 
+  // The selected icon data
+  final IconData? selectedIcon;
+
   /// Flag to know if this item is active or not
   final bool selected;
 
@@ -55,6 +58,7 @@ class FluidNavBarItem extends StatefulWidget {
   FluidNavBarItem(
     this.svgPath,
     this.icon,
+    this.selectedIcon,
     this.selected,
     this.onTap,
     this.selectedForegroundColor,

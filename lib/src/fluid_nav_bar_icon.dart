@@ -29,6 +29,9 @@ class FluidNavBarIcon {
   /// The background color of the item
   final Color? unselectedBackgroundColor;
 
+  /// The icon used when selected;
+  final IconData? selectedIcon;
+
   /// Extra information which can be used in [FluidNavBarItemBuilder]
   final Map<String, dynamic>? extras;
 
@@ -40,6 +43,7 @@ class FluidNavBarIcon {
     this.unselectedForegroundColor,
     this.selectedBackgroundColor,
     this.unselectedBackgroundColor,
+    this.selectedIcon,
     this.extras,
   })  : assert(iconPath == null || svgPath == null || icon == null,
             'Cannot provide both an svgPath and an icon.'),

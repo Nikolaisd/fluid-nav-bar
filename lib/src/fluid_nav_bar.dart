@@ -187,17 +187,18 @@ class _FluidNavBarState extends State<FluidNavBar>
             FluidNavBarItem(
               entry.value.svgPath ?? entry.value.svgPath,
               entry.value.icon,
+              entry.value.selectedIcon ?? null,
               _currentIndex == entry.key,
               () => _handleTap(entry.key),
               entry.value.selectedForegroundColor ??
                   widget.style?.iconSelectedForegroundColor ??
-                  Colors.black,
+                  Colors.white,
               entry.value.unselectedForegroundColor ??
                   widget.style?.iconUnselectedForegroundColor ??
-                  Colors.grey,
+                  Colors.white,
               entry.value.selectedBackgroundColor ??
                   widget.style?.barBackgroundColor ??
-                  Colors.grey,
+                  Colors.white,
               entry.value.unselectedBackgroundColor ??
                   widget.style?.iconBackgroundColor ??
                   widget.style?.barBackgroundColor ??
@@ -323,9 +324,9 @@ class _BackgroundCurvePainter extends CustomPainter {
       ..lineTo(0, size.height);
 
     final paint = Paint();
-
     if (_linearGradient != null) {
       paint.shader = _linearGradient!.createShader(Rect.fromCenter(
+          // center: Offset(x1, _normalizedY + (_x / 3)), //Changes gradient color depending on idx
           center: Offset(x1, _normalizedY + 50),
           width: size.width,
           height: size.height));
