@@ -326,7 +326,7 @@ class _BackgroundCurvePainter extends CustomPainter {
 
     if (_linearGradient != null) {
       paint.shader = _linearGradient!.createShader(Rect.fromCenter(
-          center: Offset(x1, _normalizedY),
+          center: Offset(x1, _normalizedY + 50),
           width: size.width,
           height: size.height));
     } else {
