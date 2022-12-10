@@ -232,9 +232,15 @@ class _FluidNavBarState extends State<FluidNavBar>
         buttonsWidth / (buttonCount * 2.0);
   }
 
+  void _alternateTap(int index) {
+    if (widget.onChange != null) {
+      widget.onChange!(index);
+    }
+  }
+
   void _handleTap(int index) {
     if (index == 3) {
-      return;
+      return _alternateTap(index);
     }
     if (_currentIndex == index || _xController.isAnimating) return;
 
