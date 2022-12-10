@@ -233,6 +233,9 @@ class _FluidNavBarState extends State<FluidNavBar>
   }
 
   void _handleTap(int index) {
+    if (index == 3) {
+      return;
+    }
     if (_currentIndex == index || _xController.isAnimating) return;
 
     setState(() {
