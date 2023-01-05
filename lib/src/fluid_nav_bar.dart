@@ -30,8 +30,6 @@ typedef Widget FluidNavBarItemBuilder(
 class FluidNavBar extends StatefulWidget {
   static const double nominalHeight = 90.0;
 
-  final double addedHeight;
-
   /// The list of icons to display
   final List<FluidNavBarIcon> icons;
 
@@ -75,7 +73,6 @@ class FluidNavBar extends StatefulWidget {
       this.scaleFactor = 1.2,
       this.iconSizeFactor = 1.0,
       this.defaultIndex = 0,
-      this.addedHeight = 0,
       FluidNavBarItemBuilder? itemBuilder})
       : this.itemBuilder = itemBuilder ?? _identityBuilder,
         assert(icons.length > 1),
@@ -130,36 +127,31 @@ class _FluidNavBarState extends State<FluidNavBar>
   @override
   Widget build(context) {
     final appSize = MediaQuery.of(context).size;
-    double height = FluidNavBar.nominalHeight;
+    const height = FluidNavBar.nominalHeight;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          width: appSize.width,
-          height: FluidNavBar.nominalHeight,
-          child: Stack(
-            children: [
-              Positioned(
-                left: 0,
-                top: 0,
-                width: appSize.width,
-                height: height,
-                child: _buildBackground(),
-              ),
-              Positioned(
-                left: (appSize.width - _getButtonContainerWidth()) / 2,
-                top: 0,
-                width: _getButtonContainerWidth(),
-                height: height,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: _buildButtons()),
-              ),
-            ],
+    return Container(
+      width: appSize.width,
+      height: FluidNavBar.nominalHeight,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            top: 0,
+            width: appSize.width,
+            height: height,
+            child: _buildBackground(),
           ),
-        ),
-      ],
+          Positioned(
+            left: (appSize.width - _getButtonContainerWidth()) / 2,
+            top: 0,
+            width: _getButtonContainerWidth(),
+            height: height,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: _buildButtons()),
+          ),
+        ],
+      ),
     );
   }
 

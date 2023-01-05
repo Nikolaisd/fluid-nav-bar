@@ -32,7 +32,6 @@ class _FluidNavBarDemoState extends State {
         extendBody: true,
         body: _child,
         bottomNavigationBar: FluidNavBar(
-          addedHeight: 20,
           icons: [
             FluidNavBarIcon(
                 svgPath: "assets/home.svg",
