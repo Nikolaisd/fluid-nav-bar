@@ -196,7 +196,7 @@ class _FluidNavBarState extends State<FluidNavBar>
                   widget.style?.barBackgroundColor ??
                   Colors.transparent,
               widget.scaleFactor,
-              (widget.animationFactor * entry.key),
+              widget.animationFactor,
               widget.iconSizeFactor,
             ),
           ),
