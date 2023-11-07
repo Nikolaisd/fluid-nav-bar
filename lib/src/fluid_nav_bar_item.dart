@@ -1,6 +1,6 @@
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import 'curves.dart';
 
@@ -186,38 +186,42 @@ class _FluidNavBarItemState extends State<FluidNavBarItem>
           child: Stack(children: <Widget>[
             Container(
               alignment: Alignment.center,
-              child: widget.icon == null
-                  ? SvgPicture.asset(
-                      widget.svgPath!,
-                      color: widget.unselectedForegroundColor,
-                      width: _iconSize,
-                      height: _iconSize * scaleAnimation.value,
-                      colorBlendMode: BlendMode.srcIn,
-                    )
-                  : Icon(
-                      widget.icon,
-                      color: widget.unselectedForegroundColor,
-                      size: _iconSize * scaleAnimation.value,
-                    ),
+              child:
+                  // widget.icon == null
+                  //     ? SvgPicture.asset(
+                  //         widget.svgPath!,
+                  //         color: widget.unselectedForegroundColor,
+                  //         width: _iconSize,
+                  //         height: _iconSize * scaleAnimation.value,
+                  //         colorBlendMode: BlendMode.srcIn,
+                  //       )
+                  //     :
+                  Icon(
+                widget.icon,
+                color: widget.unselectedForegroundColor,
+                size: _iconSize * scaleAnimation.value,
+              ),
             ),
             Container(
               alignment: Alignment.center,
               child: ClipRect(
                 clipper: _SvgPictureClipper(
                     _activeColorClipAnimation.value * scaleAnimation.value),
-                child: widget.icon == null
-                    ? SvgPicture.asset(
-                        widget.svgPath!,
-                        color: widget.selectedForegroundColor,
-                        width: _iconSize,
-                        height: _iconSize * scaleAnimation.value,
-                        colorBlendMode: BlendMode.srcIn,
-                      )
-                    : Icon(
-                        widget.icon,
-                        color: widget.selectedForegroundColor,
-                        size: _iconSize * scaleAnimation.value,
-                      ),
+                child:
+                    // widget.icon == null
+                    // ? SvgPicture.asset(
+                    //     widget.svgPath!,
+                    //     color: widget.selectedForegroundColor,
+                    //     width: _iconSize,
+                    //     height: _iconSize * scaleAnimation.value,
+                    //     colorBlendMode: BlendMode.srcIn,
+                    //   )
+                    // :
+                    Icon(
+                  widget.icon,
+                  color: widget.selectedForegroundColor,
+                  size: _iconSize * scaleAnimation.value,
+                ),
               ),
             ),
           ]),

@@ -1,6 +1,6 @@
 name: fluid_bottom_nav_bar
 description: A beautiful bottom navigation with a fluid animation. Bar color, icons and animation speed are fully customizable.
-version: 1.4.2
+version: 1.5.0
 homepage: https://github.com/eric-taix/fluid-nav-bar
 repository: https://github.com/eric-taix/fluid-nav-bar
 
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^1.1.6
+  # flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
